@@ -20,23 +20,72 @@ c.	Your client tells you that there is a problem with the raw file.  One name wa
 d.	Upon finding the misspelled name, please remove this particular observation, as the client says it's redundant.  Save the remaining dataset as an object: y2016 
 
 
-```{r echo=TRUE}
+
+```r
 #a. Bring yob2016.txt into R; note the txt file contains semi-colon delimited data
 df <- read.table("yob2016.txt", header = FALSE, sep = ";")    #read in the text file
 dim(df)                                                       #confirm all data file lines were read in
+```
+
+```
+## [1] 32869     3
+```
+
+```r
 colnames(df) <- c("FirstName", "Gender", "NumberOfChildren2016")   #set the column names
 #b.
 summary(df)           #display the summary of df
-str(df)               #display the structure of df
+```
 
+```
+##    FirstName     Gender    NumberOfChildren2016
+##  Aalijah:    2   F:18758   Min.   :    5.0     
+##  Aaliyan:    2   M:14111   1st Qu.:    7.0     
+##  Aamari :    2             Median :   12.0     
+##  Aarian :    2             Mean   :  110.7     
+##  Aarin  :    2             3rd Qu.:   30.0     
+##  Aaris  :    2             Max.   :19414.0     
+##  (Other):32857
+```
+
+```r
+str(df)               #display the structure of df
+```
+
+```
+## 'data.frame':	32869 obs. of  3 variables:
+##  $ FirstName           : Factor w/ 30295 levels "Aaban","Aabha",..: 9317 22546 3770 26409 12019 20596 6185 339 9298 11222 ...
+##  $ Gender              : Factor w/ 2 levels "F","M": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ NumberOfChildren2016: int  19414 19246 16237 16070 14722 14366 13030 11699 10926 10733 ...
+```
+
+```r
 #c.  Look for one bad name in the data
 df[grep("yyy$", df$FirstName),"FirstName"]  #locate and display the firstname that ends in three y's
+```
 
+```
+## [1] Fionayyy
+## 30295 Levels: Aaban Aabha Aabid Aabir Aabriella Aadam Aadarsh ... Zyva
+```
+
+```r
 #d.  Resolve issue with one name in the data that ends in three y's
 badentry <- grep("yyy$", df$FirstName)  #assign row location of bad first name to a variable
 y2016 <- df[(-1*badentry),]       # create new dataset that will not contain the bad firstname
 grep("yyy$", y2016$FirstName)     # confirm that the new dataset does not contain a name with three y's at end
+```
+
+```
+## integer(0)
+```
+
+```r
 dim (df) [1] - dim (y2016)  [1]   # confirm that the new  dataset has one less entry than original dataset
+```
+
+```
+## [1] 1
 ```
 
 ## Question 2A + 2B + 2C:  R Code and output below
@@ -48,14 +97,39 @@ a.	Like 1a, please import the .txt file into R.  Look at the file before you do.
 b.	Display the last ten rows in the dataframe.  Describe something you find interesting about these 10 rows.
 
 c.	Merge y2016 and y2015 by your Name column; assign it to final.  The client only cares about names that have data for both 2016 and 2015; there should be no NA values in either of your amount of children rows after merging
-```{r echo=TRUE}
+
+```r
 #a. Bring yob2015.txt into R   
 y2015 <- read.csv("yob2015.txt", header = FALSE)              #Read in the y2015.txt datafile
 dim(y2015)                                                    #confirm all data lines were read in
+```
+
+```
+## [1] 33063     3
+```
+
+```r
 colnames(y2015) <- c("FirstName", "Gender", "NumberOfChildren2015")  #set the column names
 
 #b. Retrieve the last ten rows of the y2015 dataframe
 tail(y2015, 10)
+```
+
+```
+##       FirstName Gender NumberOfChildren2015
+## 33054      Ziyu      M                    5
+## 33055      Zoel      M                    5
+## 33056     Zohar      M                    5
+## 33057    Zolton      M                    5
+## 33058      Zyah      M                    5
+## 33059    Zykell      M                    5
+## 33060    Zyking      M                    5
+## 33061     Zykir      M                    5
+## 33062     Zyrus      M                    5
+## 33063      Zyus      M                    5
+```
+
+```r
 #OBSERVATIONS ABOUT THE TEN ROWS LISTED ABOVE: The 33,054th through 33,063rd entries are displayed.
 #It looks like the datafile was already sorted alphabetically by Gender and then in descending 
 #order by FirstName within Gender. The names in these entries seem to have unique spellings and are
@@ -67,17 +141,57 @@ tail(y2015, 10)
 
 #Verify that there are no NAs in each dataset before merging
 sum(is.na(y2015$FirstName))
-sum(is.na(y2015$Gender))
-sum(is.na(y2015$NumberOfChildren2015))
-sum(is.na(y2016$FirstName))
-sum(is.na(y2016$Gender))
-sum(is.na(y2016$NumberOfChildren2016))
+```
 
+```
+## [1] 0
+```
+
+```r
+sum(is.na(y2015$Gender))
+```
+
+```
+## [1] 0
+```
+
+```r
+sum(is.na(y2015$NumberOfChildren2015))
+```
+
+```
+## [1] 0
+```
+
+```r
+sum(is.na(y2016$FirstName))
+```
+
+```
+## [1] 0
+```
+
+```r
+sum(is.na(y2016$Gender))
+```
+
+```
+## [1] 0
+```
+
+```r
+sum(is.na(y2016$NumberOfChildren2016))
+```
+
+```
+## [1] 0
+```
+
+```r
 # We want to be sure to account for Gender as well as Firstname in order to preserve the fact 
 # that some names will appear under both genders and will need to keep their distinct counts
 
 final <- merge (y2015, y2016, by=c("FirstName","Gender"))
-                
 ```
 
 
@@ -93,24 +207,44 @@ c.	The client is expecting a girl!  Omit boys and give the top 10 most popular g
 
 d.	Write these top 10 girl names and their Totals to a CSV file.  Leave out the other columns entirely.
 
-```{r echo=TRUE}
+
+```r
 #a. Add a Total column that combines the 2015 and 2016 counts for each First name
 final$Total <- final$NumberOfChildren2015 + final$NumberOfChildren2016
 prettyNum(sum(final$Total), big.mark=",")    #number of people with the names listed in both the 2015 and 2016 popular names data files combined
+```
 
+```
+## [1] "7,239,231"
+```
 
+```r
 #b. Sort in descending order by Total column and then retrieve just first names in the top 10
 finalsort <- final[order(-final$Total),]   
 finalsort[1:10, "FirstName",]            
-                       
+```
 
+```
+##  [1] Emma     Olivia   Noah     Liam     Sophia   Ava      Mason   
+##  [8] William  Jacob    Isabella
+## 30553 Levels: Aaban Aabha Aabriella Aada Aadam Aadan Aadarsh Aaden ... Zyvon
+```
+
+```r
 #c. Filter out only the female names and then retrieve just the first names in the top 10
 Girls <- subset(finalsort, Gender =="F")
 Girls[1:10, "FirstName",]
+```
 
+```
+##  [1] Emma      Olivia    Sophia    Ava       Isabella  Mia       Charlotte
+##  [8] Abigail   Emily     Harper   
+## 30553 Levels: Aaban Aabha Aabriella Aada Aadam Aadan Aadarsh Aaden ... Zyvon
+```
+
+```r
 #d. Write the top 10 Girls names with their Totals to a .csv file
 write.csv(Girls[1:10, c(1, 5)], file="Top10GirlsNames.csv", row.names=FALSE)
-
 ```
 
 ## Question 4:  Github link below
