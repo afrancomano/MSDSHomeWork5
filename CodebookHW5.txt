@@ -118,3 +118,5 @@ Girls		Dataframe resulting from taking a subset of rows from final dataset where
  
 
 
+
+Top10girlsNames.csv	The output csv file contains the top 10 newborn girl names for 2015 and 2016 combined, along with each respective total count.
