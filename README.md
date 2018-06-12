@@ -9,5 +9,8 @@ The focus of Unit 5 is on creating Tidy Data.  The homework assignment allows th
 Sources:
 Two text files, yob2015.txt and yob2016.txt were used for this exercise.  These files contain the number of firstnames used for newborns in the United States in 2015 and 2016, respectively.
 
+Output:
+Top10girlsNames.csv	is the output csv file. It contains the top 10 newborn girl names for 2015 and 2016 combined, along with each respective total count.
+
 Contact Information:
 Please contact afrancomano@smu.edu with any questions regarding the contents of the MSDSHW repository.
