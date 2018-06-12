@@ -6,7 +6,6 @@ This file contains Definitions of each object created in the RMarkdown File for 
 
 
 
-
 Objects:
 
 
@@ -103,7 +102,7 @@ finalsort	Dataframe resulting from sorting the final dataframe in descending ord
 
 Girls		Dataframe resulting from taking a subset of rows from final dataset where the Gender field is F.
             
-		Row count = 26,550
+		Row count = 11,283
             
 		Columns names and contents:   
                   
