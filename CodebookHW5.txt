@@ -1,0 +1,120 @@
+Codebook for Assignment #5
+
+
+This file contains Definitions of each object created in the RMarkdown File for Assignment #5 (located in the same Homework 5 folder).
+
+
+
+
+
+Objects:
+
+
+
+df		Dataframe created based on importing the semi-colon delimited text file yob2016.txt
+            
+		Row count = 32,869
+            
+		Columns names and contents:   
+                  
+			FirstName (string; unique name within each Gender)
+                  
+			Gender (string: M or F)
+                  
+			NumberofChildren2016 (continuous integer; number of newborns given this first name in 2016 for the respective Gender)
+ 
+
+
+
+badentry	Assigned as the location of the invalid first name in the df dataset based on yob2016.txt
+
+
+
+
+y2016		Dataframe resulting from removing the one invalid first name entry from the df dataframe.  
+            
+		Row count = 32,868
+            
+		Columns names and contents:   
+                  
+			FirstName (string; unique name within each Gender)
+                  
+			Gender (string: M or F)
+                  
+			NumberofChildren2016 (continuous integer; number of newborns given this first name in 2016 for the respective Gender)
+
+
+
+
+y2015		Dataframe created based on importing the comma delimited text file yob2015.txt
+            
+		Row count = 33,063
+            
+		Columns names and contents:   
+                  
+			FirstName (string; unique name within each Gender)
+                  
+			Gender (string: M or F)
+                  
+			NumberofChildren2015 (continuous integer; number of newborns given this first name in 2015 for the respective Gender)
+         
+         
+         
+
+
+final       	Dataframe created by merging y2015 and y2016, and adding a Total column 
+            
+		Final only contains names that were found in both y2015 and y2016, with respect to each gender separately.
+            
+		Row count = 26,550
+            
+		Columns names and contents:   
+                  
+			FirstName (string; unique name within each Gender)
+                  
+			Gender (string: M or F)
+                  
+			NumberofChildren2015 (continuous integer; number of newborns given this first name in 2015 for the respective Gender)
+
+                  	NumberofChildren2016 (continuous integer; number of newborns given this first name in 2016 for the respective Gender)
+			Total  (continuous integer;  total number of newborns given this first name in 2015 and 2016 combined for the respective Gender)
+
+
+
+
+
+finalsort	Dataframe resulting from sorting the final dataframe in descending order by the Total column
+            
+		Row count = 26,550
+            
+		Columns names and contents:   
+                  
+			FirstName (string; unique name within each Gender)
+                  
+			Gender (string: M or F)
+                  
+			NumberofChildren2015 (continuous integer; number of newborns given this first name in 2015 for the respective Gender)
+
+			NumberofChildren2016 (continuous integer; number of newborns given this first name in 2016 for the respective Gender)  
+                  
+			Total  (continuous integer; total number of newborns given this first name in 2015 and 2016 combined for the respective Gender)
+
+
+
+Girls		Dataframe resulting from taking a subset of rows from final dataset where the Gender field is F.
+            
+		Row count = 26,550
+            
+		Columns names and contents:   
+                  
+			FirstName (string; unique name within each Gender)
+                  
+			Gender (string: F)
+                  
+			NumberofChildren2015 (continuous integer; number of newborns given this first name in 2015 for the respective Gender)
+                  
+			NumberofChildren2016 (continuous integer; number of newborns given this first name in 2016 for the respective Gender)
+			Total  (continuous integer; total number of newborns given this first name in 2015 and 2016 combined  for the respective Gender)
+ 
+
+
